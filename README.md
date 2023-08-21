@@ -1,3 +1,13 @@
+THE GOAL OF THIS FORK
+=====================
+
+Better looking outline
+* With symbol on every outline line
+
+Allow making and showing regions of code file in outline
+* Prefix anything with hyphens to make a region
+
+
 HOW TO INSTALL
 ==============
 

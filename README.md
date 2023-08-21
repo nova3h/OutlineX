@@ -9,6 +9,7 @@ Steps:
 	* Clone right inside the `Packages` dir
 * Edit plugin source code
 	* Edit files right inside the newly cloned dir.
+	* Use Sublime API Ref at https://www.sublimetext.com/docs/api_reference.html
 
 
 OLD README

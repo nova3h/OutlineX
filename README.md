@@ -7,6 +7,9 @@ Better looking outline
 Allow making and showing regions of code file in outline
 * Prefix anything with hyphens to make a region
 
+Outline Example:
+![Screenshot](https://i.imgur.com/ZbxYWwU.png)
+
 
 HOW TO INSTALL
 ==============

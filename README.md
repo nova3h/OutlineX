@@ -1,3 +1,19 @@
+HOW TO INSTALL
+==============
+
+Steps:
+* Remove previous `Outline` package if any, to avoid functionality confusion.
+* Find Sublime `Packages` dir
+	* Sublime Main Menu >> Preferences >> Browse Packages
+* Clone this repo: `git clone -b dev https://github.com/dandeancook/outlinex`
+	* Clone right inside the `Packages` dir
+* Edit plugin source code
+	* Edit files right inside the newly cloned dir.
+
+
+OLD README
+==========
+
 ## Outline for Sublime Text 3
 
 ### Overview
@@ -43,7 +59,7 @@ To use `FileBrowser` and `Outline` together, please close the `FileBrowser` side
 
 ```json
 "outline_inherit_color_scheme": false
-"color_scheme": "Packages/Outline/outline-Dark.hidden-tmTheme"
+"color_scheme": "Packages/Outlinex/outline-Dark.hidden-tmTheme"
 ```
 
 Remove `-Dark` or remove the entire line to return to the bright theme. To customize your own color theme, see [this issue](https://github.com/warmdev/SublimeOutline/issues/1).

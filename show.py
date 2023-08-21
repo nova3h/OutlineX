@@ -52,7 +52,7 @@ def set_view(view_id, window, ignore_existing, single_pane):
     if not view:
         active_view = window.active_view()
         view = window.new_file()
-        view.set_syntax_file('Packages/Outline/outline.hidden-tmLanguage')
+        view.set_syntax_file('Packages/Outlinex/outline.hidden-tmLanguage')
         view.set_scratch(True)
         if view.settings().get('outline_inherit_color_scheme'):
             view.settings().set('color_scheme', active_view.settings().get('color_scheme'))

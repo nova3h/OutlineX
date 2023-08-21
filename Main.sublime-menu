@@ -12,13 +12,13 @@
                 "children":
                 [
                     {
-                        "caption": "Outline",
+                        "caption": "Outlinex",
                         "children":
                         [
                             {
                                 "command": "edit_settings",
                                 "args": {
-                                    "base_file": "${packages}/Outline/outline.sublime-settings",
+                                    "base_file": "${packages}/Outlinex/outline.sublime-settings",
                                     "default": "{\n\t$0\n}\n"
                                 },
                                 "caption": "Settings"
@@ -26,7 +26,7 @@
                             { "caption": "-" },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/Outline/outline.sublime-settings"},
+                                "args": {"file": "${packages}/Outlinex/outline.sublime-settings"},
                                 "caption": "Settings – Default"
                             },
                             {

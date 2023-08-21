@@ -22,6 +22,7 @@ Steps
 	* Clone right inside the `Packages` dir
 * OPTIONAL: Edit plugin source code
 	* Edit files right inside the newly cloned dir.
+	* Edit file `outline.sublime-settings` too if to change any settings
 	* Use Sublime API Ref at https://www.sublimetext.com/docs/api_reference.html
 
 

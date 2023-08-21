@@ -56,6 +56,7 @@ class OutlineRefreshCommand(TextCommand):
         Str         = "" # Debug value
         has_regions = False
         is_regions  = [False] * len(symlist)
+        sublime.status_message("Outline shows "+str(len(symlist))+" symbols")
 
         for i in range(len(symlist)):
             symlist[i] = symlist[i].strip()
@@ -66,6 +67,7 @@ class OutlineRefreshCommand(TextCommand):
                 is_regions[i] = True
 
         for i in range(len(symlist)):
+            # Region item
             if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0 or \
                     idx(symlist[i],"_____")==0:
                 # Change prefix to ⩥ & remove tail, change _ to -
@@ -80,7 +82,7 @@ class OutlineRefreshCommand(TextCommand):
 
                 # Add tail with corresponding length
                 while len(symlist[i])<20:
-                    symlist[i] += "—"                        
+                    symlist[i] += "—" # Full-width dash, not minus sign
 
                 # DEPRECATED: NO NEW LINE, SPOILS THE LINE VALUE TO GO TO SYMBOL
                 #             WHEN CLICK.
@@ -91,9 +93,11 @@ class OutlineRefreshCommand(TextCommand):
                 else:                        
                     symlist[i] = "\n"+symlist[i]
                 """
+
+            # Regular item:    
             else:
                 if has_regions:
-                    # WARN: THIS IS NOT A REGULAR SPACE, \u3000
+                    # WARN: THIS IS NOT A REGULAR SPACE, A LARGE SPACE \u3000
                     # See:  https://en.wikipedia.org/wiki/Whitespace_character
                     symlist[i] = "\u3000"+symlist[i]
                 else:

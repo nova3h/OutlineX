@@ -14,13 +14,13 @@ Outline Example:
 HOW TO INSTALL
 ==============
 
-Steps:
+Steps
 * Remove previous `Outline` package if any, to avoid functionality confusion.
 * Find Sublime `Packages` dir
 	* Sublime Main Menu >> Preferences >> Browse Packages
 * Clone this repo: `git clone -b dev https://github.com/dandeancook/outlinex`
 	* Clone right inside the `Packages` dir
-* Edit plugin source code
+* OPTIONAL: Edit plugin source code
 	* Edit files right inside the newly cloned dir.
 	* Use Sublime API Ref at https://www.sublimetext.com/docs/api_reference.html
 
@@ -28,7 +28,7 @@ Steps:
 HOW TO USE
 ==========
 
-Create a region:
+Create a Region
 * At any code line
 * Create a method, function, property, or variable
 	* With prefix of 5 hyphens: _____

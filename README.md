@@ -12,6 +12,19 @@ Steps:
 	* Use Sublime API Ref at https://www.sublimetext.com/docs/api_reference.html
 
 
+HOW TO USE
+==========
+
+Create a region:
+* At any code line
+* Create a method, function, property, or variable
+	* With prefix of 5 hyphens: _____
+	* With affix of 5 hyphens too: _____
+* If the language is JavaScript (ES6)
+	* It's possible to add either `#` (private method), or `$` (JS specific char)
+	  before the prefix above, in order to minifier to minify those region markers.
+
+
 OLD README
 ==========
 

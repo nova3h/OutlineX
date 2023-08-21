@@ -1,8 +1,13 @@
+# Python
+import re
+
 # Modules
 import sublime
 from sublime import Region
 from sublime_plugin import WindowCommand, TextCommand, EventListener
 from .show import show, refresh_sym_view, get_sidebar_views_groups, get_sidebar_status, binary_search
+
+# def _____UTILS_____(): pass
 
 # Index without exception
 def idx(Value, Find):
@@ -10,6 +15,8 @@ def idx(Value, Find):
         return Value.index(Find)
     except:
         return -1
+
+# def _____CLASSES_____(): pass
 
 #
 class OutlineCommand(WindowCommand):
@@ -51,23 +58,39 @@ class OutlineRefreshCommand(TextCommand):
         is_regions  = [False] * len(symlist)
 
         for i in range(len(symlist)):
-            if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0:
+            symlist[i] = symlist[i].strip()
+
+            if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0 or \
+                    idx(symlist[i],"_____")==0:
                 has_regions   = True
                 is_regions[i] = True
 
         for i in range(len(symlist)):
-            if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0:
-                # Change prefix (⩥) & remove tail, change _ to -
-                symlist[i] = symlist[i].replace("#_____", "⩥").\
-                                        replace("$_____", "⩥").\
-                                        replace("_____", "").\
-                                        replace(r"_", "-")
+            if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0 or \
+                    idx(symlist[i],"_____")==0:
+                # Change prefix to ⩥ & remove tail, change _ to -
+                # True regex (with ^ for string start)
+                symlist[i] = re.sub("#_____",  "⩥", symlist[i]);
+                symlist[i] = re.sub("\$_____", "⩥", symlist[i]);
+                symlist[i] = re.sub("^_____",  "⩥", symlist[i]);
+                symlist[i] = re.sub("_+$",     "",   symlist[i]);
 
+                # Simple regex
+                symlist[i] = symlist[i].replace(r"_", "-");
+
+                # Add tail with corresponding length
+                while len(symlist[i])<20:
+                    symlist[i] += "—"                        
+
+                # DEPRECATED: NO NEW LINE, SPOILS THE LINE VALUE TO GO TO SYMBOL
+                #             WHEN CLICK.
                 # No space before, if another region marker is right previous
+                """
                 if i>0 and is_regions[i-1]:
                     symlist[i] = symlist[i]
                 else:                        
                     symlist[i] = "\n"+symlist[i]
+                """
             else:
                 if has_regions:
                     # WARN: THIS IS NOT A REGULAR SPACE, \u3000

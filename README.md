@@ -5,7 +5,8 @@ Better looking outline
 * With symbol on every outline line
 
 Allow making and showing regions of code file in outline
-* Prefix anything with hyphens to make a region
+* Prefix identifiers which are shown in outline with hyphens to make a region
+* Those identifiers will be unused vars, empty functions, etc.
 
 Outline Example:
 ![Screenshot](https://i.imgur.com/ZbxYWwU.png)

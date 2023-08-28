@@ -7,7 +7,7 @@ from sublime import Region
 from sublime_plugin import WindowCommand, TextCommand, EventListener
 from .show import show, refresh_sym_view, get_sidebar_views_groups, get_sidebar_status, binary_search
 
-# def _____UTILS_____(): pass
+def _____UTILS_____(): pass
 
 # Index without exception
 def idx(Value, Find):
@@ -16,7 +16,8 @@ def idx(Value, Find):
     except:
         return -1
 
-# def _____CLASSES_____(): pass
+def _____CLASSES_____(): pass
+def _____COMMAND_____(): pass
 
 #
 class OutlineCommand(WindowCommand):
@@ -24,6 +25,8 @@ class OutlineCommand(WindowCommand):
     #
     def run(self, immediate=False, single_pane=False, project=False, other_group=False, layout=0):
         show(self.window, single_pane=single_pane, other_group=other_group, layout=layout)
+
+def _____SIDEBAR_____(): pass
 
 #
 class OutlineCloseSidebarCommand(WindowCommand):
@@ -40,6 +43,8 @@ class OutlineCloseSidebarCommand(WindowCommand):
         self.window.set_layout({"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]]})
         self.window.focus_view(active_view)
 
+def _____REFRESH_____(): pass
+
 #
 class OutlineRefreshCommand(TextCommand):
 
@@ -55,17 +60,35 @@ class OutlineRefreshCommand(TextCommand):
         #
         Str         = "" # Debug value
         has_regions = False
-        is_regions  = [False] * len(symlist)
+        Is_Regions  = [False] * len(symlist)
         sublime.status_message("Outline shows "+str(len(symlist))+" symbols")
 
+        # Find symbols to be indented, eg. variable functions
+        Indented_Syms = []
+
+        for i in range(len(symlist)):
+            Name = symlist[i].strip()
+
+            if idx(Name,"OX_INDENT_")==0: 
+                Tokens = Name.replace("OX_INDENT_","").split("_")
+
+                for j in range(len(Tokens)): 
+                    if idx(Indented_Syms,Tokens[j].lower())==-1: 
+                        Indented_Syms.append(Tokens[j].lower())
+        # End for
+
+        sublime.status_message("Indented symbols:\x20"+ ",\x20".join(Indented_Syms))
+
+        # Mark symbols used for region names
         for i in range(len(symlist)):
             symlist[i] = symlist[i].strip()
 
             if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0 or \
                     idx(symlist[i],"_____")==0:
                 has_regions   = True
-                is_regions[i] = True
+                Is_Regions[i] = True
 
+        # Render symbol list
         for i in range(len(symlist)):
             # Region item
             if idx(symlist[i],"#_____")==0 or idx(symlist[i],"$_____")==0 or \
@@ -88,7 +111,7 @@ class OutlineRefreshCommand(TextCommand):
                 #             WHEN CLICK.
                 # No space before, if another region marker is right previous
                 """
-                if i>0 and is_regions[i-1]:
+                if i>0 and Is_Regions[i-1]:
                     symlist[i] = symlist[i]
                 else:                        
                     symlist[i] = "\n"+symlist[i]
@@ -96,11 +119,22 @@ class OutlineRefreshCommand(TextCommand):
 
             # Regular item:    
             else:
-                if has_regions:
-                    # WARN: THIS IS NOT A REGULAR SPACE, A LARGE SPACE \u3000
-                    # See:  https://en.wikipedia.org/wiki/Whitespace_character
-                    symlist[i] = "\u3000"+symlist[i]
-                else:
+                # In a file with regions
+                if has_regions: 
+                    Symbol = symlist[i].strip().lower().replace("_","")
+
+                    if idx(Symbol,"oxindent")==0:
+                        symlist[i] = "⩥Indented"
+                    else:
+                        Indent = ""
+                        if idx(Indented_Syms,Symbol)>=0: Indent="\u3000"
+
+                        # WARN: THIS IS NOT A REGULAR SPACE, A LARGE SPACE \u3000
+                        # See:  https://en.wikipedia.org/wiki/Whitespace_character
+                        symlist[i] = "\u3000"+Indent+symlist[i]
+
+                # In a file without regions
+                else: 
                     symlist[i] = "▸\x20"+symlist[i]
         # Dan D / End
 
@@ -111,6 +145,8 @@ class OutlineRefreshCommand(TextCommand):
         self.view.settings().set('symkeys', symkeys)
         self.view.settings().set('current_file', path)
         self.view.sel().clear()
+
+def _____TOGGLE_SORT_____(): pass
 
 #
 class OutlineToggleSortCommand(TextCommand):
@@ -126,6 +162,8 @@ class OutlineToggleSortCommand(TextCommand):
 
         symlist = self.view.get_symbols()
         refresh_sym_view(sym_view, symlist, self.view.file_name())
+
+def _____EVENTS_____(): pass
 
 #
 class OutlineEventHandler(EventListener):

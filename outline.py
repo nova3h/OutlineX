@@ -101,7 +101,7 @@ class OutlineRefreshCommand(TextCommand):
                 symlist[i] = re.sub("_+$",     "",   symlist[i]);
 
                 # Blank line marker
-                if symlist[i].lower()=="⩥blank":
+                if idx(symlist[i].lower(), "⩥blank")==0:
                     symlist[i] = ""
 
                 # Simple regex

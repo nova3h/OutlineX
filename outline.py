@@ -100,12 +100,17 @@ class OutlineRefreshCommand(TextCommand):
                 symlist[i] = re.sub("^_____",  "⩥", symlist[i]);
                 symlist[i] = re.sub("_+$",     "",   symlist[i]);
 
+                # Blank line marker
+                if symlist[i].lower()=="⩥blank":
+                    symlist[i] = ""
+
                 # Simple regex
                 symlist[i] = symlist[i].replace(r"_", "-");
 
                 # Add tail with corresponding length
-                while len(symlist[i])<20:
-                    symlist[i] += "—" # Full-width dash, not minus sign
+                if len(symlist[i])>0:
+                    while len(symlist[i])<20:
+                        symlist[i] += "—" # Full-width dash, not minus sign
 
                 # DEPRECATED: NO NEW LINE, SPOILS THE LINE VALUE TO GO TO SYMBOL
                 #             WHEN CLICK.
@@ -121,13 +126,14 @@ class OutlineRefreshCommand(TextCommand):
             else:
                 # In a file with regions
                 if has_regions: 
-                    Symbol = symlist[i].strip().lower().replace("_","")
+                    # Warn: Temp is not symlist[i]
+                    Temp = symlist[i].strip().lower().replace("_","")
 
-                    if idx(Symbol,"oxindent")==0:
+                    if idx(Temp,"oxindent")==0:
                         symlist[i] = "⩥Indented"
                     else:
                         Indent = ""
-                        if idx(Indented_Syms,Symbol)>=0: Indent="\u3000"
+                        if idx(Indented_Syms,Temp)>=0: Indent="\u3000"
 
                         # WARN: THIS IS NOT A REGULAR SPACE, A LARGE SPACE \u3000
                         # See:  https://en.wikipedia.org/wiki/Whitespace_character

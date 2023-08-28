@@ -35,6 +35,10 @@ Create a Region
 * Create a method, function, property, or variable
 	* With prefix of 5 hyphens: _____
 	* With affix of 5 hyphens too: _____
+	* With prefix `OX_INDENT_` to specify method/func names to indent, eg. variable functions
+	    * Use hyphen to separate func names and no `_` in func names
+	* Exact value `_____BLANK_____` to create a blank line in outline
+
 * If the language is JavaScript (ES6)
 	* It's possible to add either `#` (private method), or `$` (JS specific char)
 	  before the prefix above, in order to minifier to minify those region markers.

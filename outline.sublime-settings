@@ -88,7 +88,7 @@
   // make FileBrowser views look more like a file browser than an editor
   // This plugin does not change font and font size, but it's
   // highly recommended to customize them in your user files.
-  "color_scheme": "Packages/Outline/outline.hidden-tmTheme",
+  "color_scheme": "Packages/Outlinex/outline.hidden-tmTheme",
   "line_numbers": false,
   "word_wrap": false,
   "spell_check": false,
@@ -97,8 +97,9 @@
   "fold_buttons": false,
   "drag_text": false,
   "highlight_line": true,
-  "margin": 0,
-  "tab_size": 3,
+  "margin": 5, // px
+  "gutter": false, // and, minimap is per windows, can't disable for Outline pane only.
+  "tab_size": 2,
   "rulers": [],
   "caret_extra_width": 0 // extra caret width causes partially hidden chars
   // "font_face": "comic sans",

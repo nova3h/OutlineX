@@ -1,0 +1,35 @@
+{
+  "name": "outlinex",
+  "version": "1.0.0",
+  "description": "Outline Column for Sublime Text 3+ with Code Regions",
+  "main": "outline.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deandeancook/outlinex.git"
+  },
+  "keywords": [
+    "Outline",
+    "Sublime",
+    "Side",
+    "Panel",
+    "JavaScript",
+    "Python",
+    "File",
+    "Outline",
+    "Code",
+    "Outline",
+    "Regions",
+    "Code",
+    "Regions",
+    "Navigation"
+  ],
+  "author": "Dan Deancook",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deandeancook/outlinex/issues"
+  },
+  "homepage": "https://github.com/deandeancook/outlinex#readme"
+}

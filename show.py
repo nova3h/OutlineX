@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# Python
 import os
+
+# Modules
 import sublime
 from os.path import basename
 
@@ -12,18 +15,21 @@ if ST3:
 else:
     from common import first, set_proper_scheme, calc_width, get_group
 
-
+#
 def set_active_group(window, view, other_group):
     nag = window.active_group()
+
     if other_group:
         group = 0 if other_group == 'left' else 1
         groups = window.num_groups()
+
         if groups == 1:
             width = calc_width(view)
             cols = [0.0, width, 1.0] if other_group == 'left' else [0.0, 1-width, 1.0]
             window.set_layout({"cols": cols, "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]})
         elif view:
             group = get_group(groups, nag)
+
         window.set_view_index(view, group, 0)
     else:
         group = nag
@@ -35,10 +41,11 @@ def set_active_group(window, view, other_group):
 
     return (nag, group)
 
-
+#
 def set_view(view_id, window, ignore_existing, single_pane):
     view = None
     active_view = None
+
     if view_id:
         # The Goto command was used so the view is already known and its contents should be
         # replaced with the new path.
@@ -52,8 +59,9 @@ def set_view(view_id, window, ignore_existing, single_pane):
     if not view:
         active_view = window.active_view()
         view = window.new_file()
-        view.set_syntax_file('Packages/Outline/outline.hidden-tmLanguage')
+        view.set_syntax_file('Packages/Outlinex/outline.hidden-tmLanguage')
         view.set_scratch(True)
+
         if view.settings().get('outline_inherit_color_scheme'):
             view.settings().set('color_scheme', active_view.settings().get('color_scheme'))
         else:
@@ -65,7 +73,7 @@ def set_view(view_id, window, ignore_existing, single_pane):
 
     return (view, reset_sels)
 
-
+#
 def show(window, view_id=None, ignore_existing=False, single_pane=False, other_group='', layout=1):
     """
     Determines the correct view to use, creating one if necessary, and prepares it.
@@ -73,17 +81,18 @@ def show(window, view_id=None, ignore_existing=False, single_pane=False, other_g
     symlist = []
     file_path = None
     prev_focus = None
+
     if other_group:
         prev_focus = window.active_view()
         symlist = prev_focus.get_symbols()
         file_path = prev_focus.file_name()
+
         # simulate 'toggle sidebar':
         if prev_focus and 'outline' in prev_focus.scope_name(0):
             window.run_command('close_file')
             return
 
     view, reset_sels = set_view(view_id, window, ignore_existing, single_pane)
-
     nag, group = set_active_group(window, view, other_group)
 
     if other_group and prev_focus:
@@ -104,6 +113,7 @@ def show(window, view_id=None, ignore_existing=False, single_pane=False, other_g
         window.run_command('dired', {'immediate': True, 'other_group': 'right', 'single_pane': True, 'project': True})
 
     width = calc_width(view)
+
     if layout == 0:
         window.set_layout({"cols": [0.0, width, 1-width, 1.0], "rows": [0.0, 0.5, 1.0], "cells": [[2, 0, 3, 2], [0, 0, 2, 2]]})
     elif layout == 1:
@@ -123,18 +133,20 @@ def show(window, view_id=None, ignore_existing=False, single_pane=False, other_g
         else:
             window.set_view_index(v, 1, 0)
 
-    window.focus_view(prev_focus)
-    
+    window.focus_view(prev_focus)    
     refresh_sym_view(view, symlist, file_path)
 
+#
 def refresh_sym_view(sym_view, symlist, path):
     l = [symbol for range, symbol in symlist]
     k = [(range.a, range.b) for range, symbol in symlist]
+
     if sym_view != None:
         sym_view.settings().erase('symlist')
         sym_view.settings().erase('symkeys')
         sym_view.run_command('outline_refresh', {'symlist': l, 'symkeys': k, 'path': path})
 
+#
 def get_sidebar_views_groups(view):
     window = view.window()
     views = window.views()
@@ -142,19 +154,24 @@ def get_sidebar_views_groups(view):
     sym_group = None
     fb_view = None
     fb_group = None
+
     for v in views:
         if 'outline.hidden-tmLanguage' in v.settings().get('syntax'):
             sym_view = v
             sym_group, i = window.get_view_index(sym_view)
+            
         if u'𝌆' in v.name() and v.id() != sym_view.id():
             fb_view = v
+
             if fb_view != None:
                 fb_group, j = window.get_view_index(fb_view)
 
     return (sym_view, sym_group, fb_view, fb_group)
 
+#
 def get_sidebar_status(view):
     sidebar_on = False
+
     for v in view.window().views():
         if u'𝌆' in v.name():
             sidebar_on = True
@@ -176,3 +193,5 @@ def binary_search(array, x):
             high = mid
 
     return low
+# End def    
+# EOF

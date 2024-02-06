@@ -1,3 +1,52 @@
+THE GOAL OF THIS FORK
+=====================
+
+Better looking outline
+* With symbol on every outline line
+
+Allow making and showing regions of code file in outline
+* Prefix identifiers which are shown in outline with hyphens to make a region
+* Those identifiers will be unused vars, empty functions, etc.
+
+Outline Example:
+![Screenshot](https://i.imgur.com/ZbxYWwU.png)
+
+
+HOW TO INSTALL
+==============
+
+Steps
+* Remove previous `Outline` package if any, to avoid functionality confusion.
+* Find Sublime `Packages` dir
+	* Sublime Main Menu >> Preferences >> Browse Packages
+* Clone this repo: `git clone -b dev https://github.com/dandeancook/outlinex`
+	* Clone right inside the `Packages` dir
+* OPTIONAL: Edit plugin source code
+	* Edit files right inside the newly cloned dir.
+	* Edit file `outline.sublime-settings` too if to change any settings
+	* Use Sublime API Ref at https://www.sublimetext.com/docs/api_reference.html
+
+
+HOW TO USE
+==========
+
+Create a Region
+* At any code line
+* Create a method, function, property, or variable
+	* With prefix of 5 hyphens: _____
+	* With affix of 5 hyphens too: _____
+	* With prefix `OX_INDENT_` to specify method/func names to indent, eg. variable functions
+	    * Use hyphen to separate func names and no `_` in func names
+	* Exact value `_____BLANK_____` to create a blank line in outline
+
+* If the language is JavaScript (ES6)
+	* It's possible to add either `#` (private method), or `$` (JS specific char)
+	  before the prefix above, in order to minifier to minify those region markers.
+
+
+OLD README
+==========
+
 ## Outline for Sublime Text 3
 
 ### Overview
@@ -43,7 +92,7 @@ To use `FileBrowser` and `Outline` together, please close the `FileBrowser` side
 
 ```json
 "outline_inherit_color_scheme": false
-"color_scheme": "Packages/Outline/outline-Dark.hidden-tmTheme"
+"color_scheme": "Packages/Outlinex/outline-Dark.hidden-tmTheme"
 ```
 
 Remove `-Dark` or remove the entire line to return to the bright theme. To customize your own color theme, see [this issue](https://github.com/warmdev/SublimeOutline/issues/1).

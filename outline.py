@@ -55,7 +55,7 @@ class OutlineRefreshCommand(TextCommand):
         if symlist and self.view.settings().get('outline_alphabetical'):
             symlist, symkeys = (list(t) for t in zip(*sorted(zip(symlist, symkeys))))
 
-        # Dan D / Begin
+        # Dan D / Begin --------------------------------------------------------
         # Change region prefixes & item prefixes
         #
         Str         = "" # Debug value
@@ -127,7 +127,7 @@ class OutlineRefreshCommand(TextCommand):
                 # In a file with regions
                 if has_regions: 
                     # Warn: Temp is not symlist[i]
-                    Temp = symlist[i].strip().lower().replace("_","")
+                    Temp = symlist[i].strip().lower().replace("_","").replace("-","")
 
                     if idx(Temp,"oxindent")==0:
                         symlist[i] = "⩥Indented"
@@ -142,7 +142,7 @@ class OutlineRefreshCommand(TextCommand):
                 # In a file without regions
                 else: 
                     symlist[i] = "▸\x20"+symlist[i]
-        # Dan D / End
+        # Dan D / End ----------------------------------------------------------
 
         # Show up
         Str = Str + ("\n".join(symlist))

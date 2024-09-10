@@ -3,9 +3,9 @@ import re
 
 # Modules
 import sublime
-from sublime import Region
+from sublime        import Region
 from sublime_plugin import WindowCommand, TextCommand, EventListener
-from .show import show, refresh_sym_view, get_sidebar_views_groups, get_sidebar_status, binary_search
+from .show          import show, refresh_sym_view, get_sidebar_views_groups, get_sidebar_status, binary_search
 
 def _____UTILS_____(): pass
 
@@ -76,7 +76,6 @@ class OutlineRefreshCommand(TextCommand):
                     if idx(Indented_Syms,Tokens[j].lower())==-1: 
                         Indented_Syms.append(Tokens[j].lower())
         # End for
-
         sublime.status_message("Indented symbols:\x20"+ ",\x20".join(Indented_Syms))
 
         # Mark symbols used for region names
@@ -95,10 +94,10 @@ class OutlineRefreshCommand(TextCommand):
                     idx(symlist[i],"_____")==0:
                 # Change prefix to ⩥ & remove tail, change _ to -
                 # True regex (with ^ for string start)
-                symlist[i] = re.sub("#_____",  "⩥", symlist[i]);
+                symlist[i] = re.sub("#_____" , "⩥", symlist[i]);
                 symlist[i] = re.sub("\$_____", "⩥", symlist[i]);
-                symlist[i] = re.sub("^_____",  "⩥", symlist[i]);
-                symlist[i] = re.sub("_+$",     "",   symlist[i]);
+                symlist[i] = re.sub("^_____" , "⩥", symlist[i]);
+                symlist[i] = re.sub("_+$"    , ""  , symlist[i]);
 
                 # Blank line marker
                 if idx(symlist[i].lower(), "⩥blank")==0:
@@ -180,14 +179,14 @@ class OutlineEventHandler(EventListener):
             return
 
         sym_view, sym_group, fb_view, fb_group = get_sidebar_views_groups(view)
-        sym_view = view
-        window = view.window()
+        sym_view     = view
+        window       = view.window()
         sym_group, i = window.get_view_index(sym_view)
             
         if len(sym_view.sel()) == 0:
             return
 
-        (row, col) = sym_view.rowcol(sym_view.sel()[0].begin())
+        (row, col)  = sym_view.rowcol(sym_view.sel()[0].begin())
         active_view = None
 
         for group in range(window.num_groups()):
@@ -269,9 +268,9 @@ class OutlineEventHandler(EventListener):
         # get the current cursor location
         point = view.sel()[0].begin()
         # get the current symbol and its line in outline
-        range_lows = [view.line(range.a).begin() for range, symbol in symlist]
+        range_lows   = [view.line(range.a).begin() for range, symbol in symlist]
         range_sorted = [0] + range_lows[1:len(range_lows)] + [view.size()]
-        sym_line = binary_search(range_sorted, point) - 1
+        sym_line     = binary_search(range_sorted, point) - 1
 
         if (sym_view is not None):
             sym_point_start = sym_view.text_point(sym_line, 0)

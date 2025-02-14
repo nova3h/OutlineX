@@ -19,7 +19,7 @@ Steps
 * Remove previous `Outline` package if any, to avoid functionality confusion.
 * Find Sublime `Packages` dir
 	* Sublime Main Menu >> Preferences >> Browse Packages
-* Clone this repo: `git clone -b dev https://github.com/dandeancook/outlinex`
+* Clone this repo: `git clone -b dev https://github.com/nova3h/outlinex`
 	* Clone right inside the `Packages` dir
 * OPTIONAL: Edit plugin source code
 	* Edit files right inside the newly cloned dir.

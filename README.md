@@ -21,6 +21,7 @@ Steps
 	* Sublime Main Menu >> Preferences >> Browse Packages
 * Clone this repo: `git clone -b dev https://github.com/nova3h/outlinex`
 	* Clone right inside the `Packages` dir
+* The outline tab can be set as a sidebar on the left or right. Press Ctrl + Shift + P and select either Browse Mode: Outline (Left) or Browse Mode: Outline (Right) to set your preferred layout. 
 * OPTIONAL: Edit plugin source code
 	* Edit files right inside the newly cloned dir.
 	* Edit file `outline.sublime-settings` too if to change any settings
